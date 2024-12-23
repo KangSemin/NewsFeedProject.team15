@@ -43,4 +43,18 @@ public class CommentService {
                 .map(CommentResponseDto::new)
                 .collect(Collectors.toList());
     }
+
+    public void updateComment(Long commentId, CommentRequestDto requestDto) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없습니다."));
+
+        comment.updateContent(requestDto.getContent());
+    }
+
+    public void deleteComment(Long commentId) {
+        Comment comment = commentRepository.findById(commentId)
+                .orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없습니다."));
+
+        commentRepository.delete(comment);
+    }
 }

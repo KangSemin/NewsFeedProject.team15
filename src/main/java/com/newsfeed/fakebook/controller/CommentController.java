@@ -33,4 +33,18 @@ public class CommentController {
         List<CommentResponseDto> comment = commentService.getCommentByFeed(feedId);
         return ResponseEntity.ok(comment);
     }
+
+    @PutMapping("/{commentId}")
+    public ResponseEntity<Void> updateComment(
+            @PathVariable Long commmentId,
+            @RequestBody CommentRequestDto requestDto) {
+        commentService.updateComment(commmentId, requestDto);
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping("/{commentId}")
+    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
+        commentService.deleteComment(commentId);
+        return ResponseEntity.ok().build();
+    }
 }
