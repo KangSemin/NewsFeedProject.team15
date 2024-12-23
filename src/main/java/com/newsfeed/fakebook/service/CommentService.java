@@ -21,7 +21,7 @@ public class CommentService {
 
     private final CommentRepository commentRepository;
     private final UserRepository userRepository;
-//    private final FeedRepository feedRepository;
+    private final FeedRepository feedRepository;
 
     public Long createComment(Long userId, Long feedId, CommentRequestDto requestDto) {
         User user = userRepository.findById(userId)
