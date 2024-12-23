@@ -1,4 +1,4 @@
-package com.newsfeed.fakebook.dto;
+package com.newsfeed.fakebook.dto.userDto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
