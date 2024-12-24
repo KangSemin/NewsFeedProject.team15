@@ -14,16 +14,12 @@ public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long likeid;
-
-    private String username;
-
-    private String profileImage;
+    private Long likeId;
 
     @Builder
-    public Like( String username, String profileImage,User user, Feed feed ) {
-        this.username = username;
-        this.profileImage = profileImage;
+    public Like( User user, Feed feed ) {
+        this.user= user;
+        this.feed = feed;
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -33,5 +29,15 @@ public class Like {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "feed_id")
     private Feed feed;
+
+    private String username;
+
+    private String profileImage;
+
+    public void LikeResponseDto (String username, String profileImage) {
+        this.username = username;
+        this.profileImage = profileImage;
+    }
+
 
 }

@@ -19,7 +19,7 @@ public class UserController {
 
 	@PostMapping("/signup")
 	public ResponseEntity<Long> signup(HttpServletResponse response) {
-		Long userId  ;
+		Long userId ;
 		return ResponseEntity.ok(userId);
 	}
 
