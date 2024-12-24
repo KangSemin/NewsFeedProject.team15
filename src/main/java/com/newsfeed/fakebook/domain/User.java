@@ -1,8 +1,8 @@
 package com.newsfeed.fakebook.domain;
 
-
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
+import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +10,14 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "users")
 @Getter
 @EntityListeners(AuditingEntityListener.class)
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
 
 	@Id
@@ -32,12 +34,13 @@ public class User {
 	@CreatedDate
 	private LocalDateTime registerDate;
 	@CreatedDate
-	private  LocalDateTime updatedDate;
+	private LocalDateTime updatedDate;
 
 	private String profileImage;
 
 	private boolean deleted = false;
 	private LocalDateTime deletedDate;
+
 
 	@Builder
 	public User(String email, String password, String username) {

@@ -25,7 +25,7 @@ public class Comment {
 	private String content;
 
 	@CreatedDate
-	private LocalDateTime writtenDate;
+	private LocalDateTime writtenTime;
 
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", nullable = false)
