@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface FeedRepository extends JpaRepository<Feed, Long> {
-    Optional<Feed> findUserByFeedname(Feed userId);
+    Optional<Feed> findById(Long feedId);
 }
