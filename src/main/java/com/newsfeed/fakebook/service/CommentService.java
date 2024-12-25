@@ -44,22 +44,28 @@ public class CommentService {
                 .collect(Collectors.toList());
     }
 
-    public void updateComment(Long userId, Long commentId, CommentRequestDto requestDto) throws IllegalAccessException {
-        Comment comment = commentRepository.findById(commentId)
+    public void updateComment(Long userId, Long feedId, Long commmentId, CommentRequestDto requestDto) throws IllegalAccessException {
+        Comment comment = commentRepository.findById(commmentId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없습니다."));
+        Feed feed = feedRepository.findById(feedId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 
-        if (!comment.getUser().getUserId().equals(userId)) {
+        if (!comment.getUser().getUserId().equals(userId) &&
+                !feed.getUser().getUserId().equals(userId)) {
             throw new IllegalAccessException("댓글을 수정할 권한이 없습니다.");
         }
 
         comment.updateContent(requestDto.getContent());
     }
 
-    public void deleteComment(Long userId, Long commentId) throws IllegalAccessException {
+    public void deleteComment(Long userId, Long feedId, Long commentId, Long id) throws IllegalAccessException {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없습니다."));
+        Feed feed = feedRepository.findById(feedId)
+                .orElseThrow(() -> new IllegalArgumentException("게시글을 찾을 수 없습니다."));
 
-        if (!comment.getUser().getUserId().equals(userId)) {
+        if (!comment.getUser().getUserId().equals(userId) &&
+                !feed.getUser().getUserId().equals(userId)) {
             throw new IllegalAccessException("댓글을 삭제할 권한이 없습니다");
         }
 

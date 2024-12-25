@@ -33,18 +33,20 @@ public class CommentController {
 
     @PutMapping("/{commentId}")
     public ResponseEntity<Void> updateComment(
+            @PathVariable Long feedId,
             @PathVariable Long commmentId,
             @RequestHeader Long userId,
             @RequestBody CommentRequestDto requestDto) throws IllegalAccessException {
-        commentService.updateComment(userId, commmentId, requestDto);
+        commentService.updateComment(userId, feedId, commmentId, requestDto);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{commentId}")
     public ResponseEntity<Void> deleteComment(
+            @PathVariable Long feedId,
             @PathVariable Long commentId,
             @RequestHeader Long userId) throws IllegalAccessException {
-        commentService.deleteComment(userId, commentId);
+        commentService.deleteComment(userId, feedId, commentId);
         return ResponseEntity.ok().build();
     }
 }
