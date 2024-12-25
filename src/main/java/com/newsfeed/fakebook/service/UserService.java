@@ -4,7 +4,6 @@ package com.newsfeed.fakebook.service;
 import com.newsfeed.fakebook.domain.User;
 import com.newsfeed.fakebook.dto.UserRequestDto;
 import com.newsfeed.fakebook.dto.UserResponseDto;
-import com.newsfeed.fakebook.repository.LikeRepository;
 import com.newsfeed.fakebook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -51,7 +50,5 @@ public class UserService {
 		userRepository.findById(userId).get().markAsDeleted();
 
 	}
-
-
 
 }

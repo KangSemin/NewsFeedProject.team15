@@ -1,49 +1,69 @@
 package com.newsfeed.fakebook.controller;
 
-
+import com.newsfeed.fakebook.config.JwtConfig;
 import com.newsfeed.fakebook.domain.User;
+import com.newsfeed.fakebook.dto.userDto.LoginRequestDto;
+import com.newsfeed.fakebook.dto.userDto.UserRequestDto;
+import com.newsfeed.fakebook.dto.userDto.UserResponseDto;
 import com.newsfeed.fakebook.service.UserService;
-import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
+import java.util.Map;
+
+@Slf4j
 @RestController
 @RequestMapping("/fakebook/users")
 @RequiredArgsConstructor
 public class UserController {
 
 	private final UserService userService;
-
+	private final JwtConfig jwtConfig;
 
 	@PostMapping("/signup")
-	public ResponseEntity<Long> signup(HttpServletResponse response) {
-		Long userId ;
-		return ResponseEntity.ok(userId);
+	public ResponseEntity<Map<String, Object>> signup(@RequestBody UserRequestDto request) {
+		Long userId = userService.createUser(request);
+		String token = jwtConfig.generateToken(userId);
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("userId", userId);
+		response.put("token", token);
+		
+		return ResponseEntity.ok(response);
 	}
 
 	@PostMapping("/login")
-	public ResponseEntity<String> login(HttpSession session) {
-
-		User user ;
-		session.setAttribute("userId",user);
-		return ResponseEntity.ok("Login success!");
-	}
-
-	@PostMapping("logout")
-	public ResponseEntity<String> logout(HttpSession session) {
-
-		session.invalidate();
-		return ResponseEntity.ok("Logout success!");
+	public ResponseEntity<Map<String, Object>> login(@RequestBody LoginRequestDto request) {
+		User user = userService.login(request);
+		String token = jwtConfig.generateToken(user.getUserId());
+		
+		Map<String, Object> response = new HashMap<>();
+		response.put("userId", user.getUserId());
+		response.put("token", token);
+		response.put("message", "로그인 성공!");
+		
+		return ResponseEntity.ok(response);
 	}
 
 	@GetMapping
-	public ResponseEntity<> getUser(@CookieValue(required = false) Long userId) {
-
-
-
+	public ResponseEntity<UserResponseDto> getUser(@RequestAttribute Long userId) {
+		UserResponseDto user = userService.getUser(userId);
+		return ResponseEntity.ok(user);
 	}
 
+	@PutMapping
+	public ResponseEntity<Void> updateUser(@RequestAttribute Long userId,
+	                                     @RequestBody UserRequestDto request) {
+		userService.updateUser(userId, request);
+		return ResponseEntity.ok().build();
+	}
 
+	@DeleteMapping
+	public ResponseEntity<Void> deleteUser(@RequestAttribute Long userId) {
+		userService.deleteUser(userId);
+		return ResponseEntity.ok().build();
+	}
 }
