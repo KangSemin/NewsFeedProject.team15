@@ -30,6 +30,7 @@ public class LikeService {
         //        Like like = new Like();
         //        like.setUser(user);
         //        like.setFeed(feed);
+        // lllll
 
         likeRepository.save(like);
     }
