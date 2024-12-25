@@ -19,32 +19,32 @@ public class CommentController {
     @PostMapping
     public ResponseEntity<Long> createComment(
             @PathVariable Long feedId,
-            @CookieValue(required = false) Long userId,
+            @RequestHeader Long userId,
             @RequestBody CommentRequestDto requestDto) {
-        if (userId == null) {
-            throw new IllegalArgumentException("로그인이 필요합니다.");
-        }
         Long commentId = commentService.createComment(userId, feedId, requestDto);
         return ResponseEntity.ok(commentId);
     }
 
     @GetMapping
     public ResponseEntity<List<CommentResponseDto>> getCommentByFeed(@PathVariable Long feedId) {
-        List<CommentResponseDto> comment = commentService.getCommentByFeed(feedId);
-        return ResponseEntity.ok(comment);
+        List<CommentResponseDto> comments = commentService.getCommentByFeed(feedId);
+        return ResponseEntity.ok(comments);
     }
 
     @PutMapping("/{commentId}")
     public ResponseEntity<Void> updateComment(
             @PathVariable Long commmentId,
-            @RequestBody CommentRequestDto requestDto) {
-        commentService.updateComment(commmentId, requestDto);
+            @RequestHeader Long userId,
+            @RequestBody CommentRequestDto requestDto) throws IllegalAccessException {
+        commentService.updateComment(userId, commmentId, requestDto);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> deleteComment(@PathVariable Long commentId) {
-        commentService.deleteComment(commentId);
+    public ResponseEntity<Void> deleteComment(
+            @PathVariable Long commentId,
+            @RequestHeader Long userId) throws IllegalAccessException {
+        commentService.deleteComment(userId, commentId);
         return ResponseEntity.ok().build();
     }
 }
