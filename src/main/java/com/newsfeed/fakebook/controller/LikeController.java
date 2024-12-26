@@ -33,7 +33,7 @@ public class LikeController {
                 likeService.findById(id);
         return new ResponseEntity<>(likeResponseDto, HttpStatus.OK);
 
-
+//코드가 똑같음
 
 
 

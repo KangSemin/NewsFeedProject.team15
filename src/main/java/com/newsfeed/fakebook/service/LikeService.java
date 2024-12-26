@@ -30,19 +30,19 @@ public class LikeService {
         //        Like like = new Like();
         //        like.setUser(user);
         //        like.setFeed(feed);
+        // lllll
 
         likeRepository.save(like);
     }
 
-    public LikeResponseDto findById(Long likeid) {
 
-
-        Like findlike = likeRepository.findById(likeid)
-                .orElseThrow(() -> new RuntimeException("feed name이 없음" + likeid));
-        Feed feed = findlike.getFeed();
-        User user = findlike.getUser();
+    public LikeResponseDto findById(Long likeId) {
+        Like findlike = likeRepository.findById(likeId)
+                .orElseThrow(() -> new RuntimeException("feed name이 없음" + likeId));
 
         return new LikeResponseDto(findlike.getUsername(), findlike.getProfileImage());
     }
+
+
 }
 //new Like();
