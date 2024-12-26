@@ -6,6 +6,7 @@ import com.newsfeed.fakebook.domain.User;
 import com.newsfeed.fakebook.dto.comment.CommentRequestDto;
 import com.newsfeed.fakebook.dto.comment.CommentResponseDto;
 import com.newsfeed.fakebook.repository.CommentRepository;
+import com.newsfeed.fakebook.repository.FeedRepository;
 import com.newsfeed.fakebook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
