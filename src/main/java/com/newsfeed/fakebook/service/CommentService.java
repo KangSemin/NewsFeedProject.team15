@@ -6,6 +6,7 @@ import com.newsfeed.fakebook.domain.User;
 import com.newsfeed.fakebook.dto.comment.CommentRequestDto;
 import com.newsfeed.fakebook.dto.comment.CommentResponseDto;
 import com.newsfeed.fakebook.repository.CommentRepository;
+import com.newsfeed.fakebook.repository.FeedRepository;
 import com.newsfeed.fakebook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -58,7 +59,7 @@ public class CommentService {
         comment.updateContent(requestDto.getContent());
     }
 
-    public void deleteComment(Long userId, Long feedId, Long commentId, Long id) throws IllegalAccessException {
+    public void deleteComment(Long userId, Long feedId, Long commentId) throws IllegalAccessException {
         Comment comment = commentRepository.findById(commentId)
                 .orElseThrow(() -> new IllegalArgumentException("댓글을 찾을 수 없습니다."));
         Feed feed = feedRepository.findById(feedId)
