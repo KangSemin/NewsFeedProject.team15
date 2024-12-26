@@ -12,4 +12,4 @@ public interface ReportRepository extends JpaRepository<Report, Long> {
     List<Report> findByReporter(User reporter);
     List<Report> findByReportedUser(User reportedUser);
     List<Report> findByStatus(Report.ReportStatus status);
-} 
+}
