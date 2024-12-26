@@ -28,4 +28,8 @@ public class FeedService {
                 .build();
         return feedRepository.save(feed).getFeedId();
     }
+
+    public List<FeedDto> getAllFeeds() {
+        List<Feed> all = feedRepository.findAll();
+    }
 }
