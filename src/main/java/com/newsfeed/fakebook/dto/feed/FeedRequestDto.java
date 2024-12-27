@@ -1,4 +1,4 @@
-package com.newsfeed.fakebook.dto.feedDto;
+package com.newsfeed.fakebook.dto.feed;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;

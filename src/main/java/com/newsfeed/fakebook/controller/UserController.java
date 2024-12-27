@@ -2,10 +2,11 @@ package com.newsfeed.fakebook.controller;
 
 import com.newsfeed.fakebook.config.JwtConfig;
 import com.newsfeed.fakebook.domain.User;
-import com.newsfeed.fakebook.dto.userDto.LoginRequestDto;
-import com.newsfeed.fakebook.dto.userDto.UserRequestDto;
-import com.newsfeed.fakebook.dto.userDto.UserResponseDto;
+import com.newsfeed.fakebook.dto.user.LoginRequestDto;
+import com.newsfeed.fakebook.dto.user.UserRequestDto;
+import com.newsfeed.fakebook.dto.user.UserResponseDto;
 import com.newsfeed.fakebook.service.UserService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -46,6 +47,12 @@ public class UserController {
 		response.put("message", "로그인 성공!");
 		
 		return ResponseEntity.ok(response);
+	}
+
+	@PostMapping("/logout")
+	public ResponseEntity<Void> logout(@RequestAttribute Long userId, HttpServletRequest request) {
+		request.removeAttribute("userId");
+		return ResponseEntity.ok().build();
 	}
 
 	@GetMapping

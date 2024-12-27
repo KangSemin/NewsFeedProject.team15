@@ -1,6 +1,5 @@
-package com.newsfeed.fakebook.dto;
+package com.newsfeed.fakebook.dto.like;
 
-import com.newsfeed.fakebook.domain.Like;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

@@ -17,10 +17,9 @@ public class CommentController {
     private final CommentService commentService;
 
     @PostMapping
-    public ResponseEntity<Long> createComment(
-            @PathVariable Long feedId,
-            @RequestHeader Long userId,
-            @RequestBody CommentRequestDto requestDto) {
+    public ResponseEntity<Long> createComment(@PathVariable Long feedId,
+                                              @RequestAttribute Long userId,
+                                              @RequestBody CommentRequestDto requestDto) {
         Long commentId = commentService.createComment(userId, feedId, requestDto);
         return ResponseEntity.ok(commentId);
     }
@@ -32,20 +31,18 @@ public class CommentController {
     }
 
     @PutMapping("/{commentId}")
-    public ResponseEntity<Void> updateComment(
-            @PathVariable Long feedId,
-            @PathVariable Long commmentId,
-            @RequestHeader Long userId,
-            @RequestBody CommentRequestDto requestDto) throws IllegalAccessException {
-        commentService.updateComment(userId, feedId, commmentId, requestDto);
+    public ResponseEntity<Void> updateComment(@PathVariable Long feedId,
+                                              @PathVariable Long commentId,
+                                              @RequestAttribute Long userId,
+                                              @RequestBody CommentRequestDto requestDto) throws IllegalAccessException {
+        commentService.updateComment(userId, feedId, commentId, requestDto);
         return ResponseEntity.ok().build();
     }
 
     @DeleteMapping("/{commentId}")
-    public ResponseEntity<Void> deleteComment(
-            @PathVariable Long feedId,
-            @PathVariable Long commentId,
-            @RequestHeader Long userId) throws IllegalAccessException {
+    public ResponseEntity<Void> deleteComment(@PathVariable Long feedId,
+                                              @PathVariable Long commentId,
+                                              @RequestAttribute Long userId) throws IllegalAccessException {
         commentService.deleteComment(userId, feedId, commentId);
         return ResponseEntity.ok().build();
     }

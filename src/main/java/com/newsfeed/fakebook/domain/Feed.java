@@ -6,12 +6,13 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
 
-@Entity
-@Table(name = "feeds")
-@Getter
+@Entity @Table(name = "feeds") @Getter
+@EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Feed {
 	@Id
@@ -21,24 +22,20 @@ public class Feed {
 	@Column(nullable = false)
 	private String content;
 
-	private Integer likecount;
-
-	private Integer pageable;
-
 	@CreatedDate
 	private LocalDateTime postedTime;
 
+	@LastModifiedDate
+	private LocalDateTime modifiedTime;
+
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id")
-
 	private User user;
 
 	@Builder
-	public Feed(User user, String content, Integer likecount, Integer pageable) {
+	public Feed(User user, String content) {
 		this.user = user;
 		this.content = content;
-		this.likecount = likecount;
-		this.pageable = pageable;
 	}
 
 	public void update(String contents) {

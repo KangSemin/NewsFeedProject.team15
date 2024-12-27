@@ -12,4 +12,6 @@ public interface CommentRepository extends JpaRepository<Comment, Long> {
 
     @Query("select c from Comment c where c.feed.feedId = :feedId order by c.writtenTime desc")
     List<Comment> findByFeedId(@Param("feedId") Long feedId);
+
+    Long countByFeed_FeedId(Long feedFeedId);
 }

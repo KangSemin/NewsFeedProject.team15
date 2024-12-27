@@ -2,6 +2,7 @@ package com.newsfeed.fakebook.domain;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
@@ -41,12 +42,11 @@ public class Friend {
     private LocalDateTime requestDate;
     
     private LocalDateTime acceptedDate;
-    
-    public Friend(User fromUser, User toUser) {
-        this.fromUserId = fromUser.getUserId();
-        this.toUserId = toUser.getUserId();
-        this.fromUser = fromUser;
-        this.toUser = toUser;
+
+    @Builder
+    public Friend(Long fromUserId, Long toUserId) {
+        this.fromUserId = fromUserId;
+        this.toUserId = toUserId;
     }
     
     public void accept() {

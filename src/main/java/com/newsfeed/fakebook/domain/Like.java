@@ -4,23 +4,15 @@ import jakarta.persistence.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-@Getter
-@Entity
-@Table(name = "likes")
+@Getter @Entity @Table(name = "likes")
 @NoArgsConstructor
-
 public class Like {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long likeId;
-
-    @Builder
-    public Like( User user, Feed feed ) {
-        this.user= user;
-        this.feed = feed;
-    }
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
@@ -30,14 +22,9 @@ public class Like {
     @JoinColumn(name = "feed_id")
     private Feed feed;
 
-    private String username;
-
-    private String profileImage;
-
-    public void LikeResponseDto (String username, String profileImage) {
-        this.username = username;
-        this.profileImage = profileImage;
+    @Builder
+    public Like( User user, Feed feed ) {
+        this.user= user;
+        this.feed = feed;
     }
-
-
 }

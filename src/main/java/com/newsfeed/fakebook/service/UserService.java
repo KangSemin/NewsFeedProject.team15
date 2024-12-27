@@ -3,9 +3,9 @@ package com.newsfeed.fakebook.service;
 
 import com.newsfeed.fakebook.config.PasswordEncoder;
 import com.newsfeed.fakebook.domain.User;
-import com.newsfeed.fakebook.dto.userDto.LoginRequestDto;
-import com.newsfeed.fakebook.dto.userDto.UserRequestDto;
-import com.newsfeed.fakebook.dto.userDto.UserResponseDto;
+import com.newsfeed.fakebook.dto.user.LoginRequestDto;
+import com.newsfeed.fakebook.dto.user.UserRequestDto;
+import com.newsfeed.fakebook.dto.user.UserResponseDto;
 import com.newsfeed.fakebook.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
