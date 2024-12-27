@@ -7,15 +7,12 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
 
-@Entity
-@Table(name = "users")
-@Getter
+@Entity @Table(name = "users") @Getter
 @EntityListeners(AuditingEntityListener.class)
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class User {
@@ -33,10 +30,9 @@ public class User {
 
 	@CreatedDate
 	private LocalDateTime registerDate;
-	@CreatedDate
-	private LocalDateTime updatedDate;
 
-	private String profileImage;
+	@LastModifiedDate
+	private LocalDateTime updatedDate;
 
 	private boolean deleted = false;
 	private LocalDateTime deletedDate;

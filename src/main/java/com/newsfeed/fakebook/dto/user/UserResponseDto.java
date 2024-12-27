@@ -1,4 +1,4 @@
-package com.newsfeed.fakebook.dto.userDto;
+package com.newsfeed.fakebook.dto.user;
 
 
 import com.newsfeed.fakebook.domain.User;

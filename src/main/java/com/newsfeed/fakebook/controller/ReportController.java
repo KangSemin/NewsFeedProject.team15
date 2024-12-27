@@ -13,10 +13,9 @@ public class ReportController {
     private final ReportService reportService;
     
     @PostMapping("/{reportedUserId}/report")
-    public ResponseEntity<Void> reportUser(
-            @CookieValue(required = false) Long userId,
-            @PathVariable Long reportedUserId,
-            @RequestParam String reason) {
+    public ResponseEntity<Void> reportUser(@RequestAttribute Long userId,
+                                           @PathVariable Long reportedUserId,
+                                           @RequestParam String reason) {
         if (userId == null) {
             throw new IllegalArgumentException("로그인이 필요합니다.");
         }
